@@ -11,8 +11,8 @@
   DTS:LocaleID="10250"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{B987D911-AC95-4079-AB0B-12FECBA8251E}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{691596AF-D9EE-479D-AAE6-88D3BE53DD7F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1500,11 +1500,9 @@
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT proyD.id AS ProyectoID, cliD.id AS ClienteID, tiD.id AS TiempoID, empD.id AS EmpleadoID,
 detN.horasIngresadas AS HorasConsumidas,
-proyN.horasPlanificadas AS HorasPlanificadas,
-estN.descripcion AS Estado 
+proyN.horasPlanificadas AS HorasPlanificadas
 FROM programate.dbo.Software softN 
 INNER JOIN programate.dbo.Proyecto proyN ON (softN.proyectoID=proyN.id)
-INNER JOIN programate.dbo.Estado estN ON (proyN.estadoID=estN.id)
 INNER JOIN programate.dbo.Cliente cliN ON (cliN.id=proyN.clienteID)
 INNER JOIN programate.dbo.ProyectoDetalle detN ON (detN.proyectoID=proyN.id)
 INNER JOIN programate.dbo.Empleado empN ON (empN.id=detN.empleadoID)
@@ -1603,17 +1601,6 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       name="HorasPlanificadas"
                       precision="18"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estado]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversión"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estado]"
-                      length="50"
-                      lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estado]"
-                      name="Estado"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1643,12 +1630,6 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       dataType="numeric"
                       name="HorasPlanificadas"
                       precision="18" />
-                    <externalMetadataColumn
-                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estado]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="Estado" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1688,13 +1669,6 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[HorasPlanificadas]"
                       name="HorasPlanificadas"
                       precision="18" />
-                    <outputColumn
-                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estado]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estado]"
-                      name="Estado" />
                     <outputColumn
                       refId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
                       dataType="i4"
@@ -3003,28 +2977,6 @@ FROM Software</property>
           Id="Package\Software\Conversión de datos"
           TopLeft="350,181" />
         <EdgeLayout
-          Id="Package\Software.Paths[Salida de origen de OLE DB]"
-          TopLeft="438.25,117">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,64"
-              Start="0,0"
-              End="0,56.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,56.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Software.Paths[Salida de conversión de datos]"
           TopLeft="435.25,223">
           <EdgeLayout.Curve>
@@ -3038,6 +2990,28 @@ FROM Software</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Software.Paths[Salida de origen de OLE DB]"
+          TopLeft="438.25,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
