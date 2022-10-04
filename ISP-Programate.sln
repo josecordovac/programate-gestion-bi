@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ISP-Programate", "ISP-Programate.dtproj", "{CEF95963-2569-468A-B9E8-414AB3A8658C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEF95963-2569-468A-B9E8-414AB3A8658C}.Development|Default.ActiveCfg = Development
+		{CEF95963-2569-468A-B9E8-414AB3A8658C}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A001FCE0-C8C3-43B8-BAA0-D4DCA519D872}
+	EndGlobalSection
+EndGlobal
