@@ -11,8 +11,8 @@
   DTS:LocaleID="10250"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{691596AF-D9EE-479D-AAE6-88D3BE53DD7F}">
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{75174849-832E-4FCC-8CA1-064BDF1EF518}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -728,6 +728,348 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Estado"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{776799B7-7B37-41FE-AB2F-1FB0352083ED}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Estado"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Estado\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Estado\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Estado\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[descripcion]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="descripcion"
+                      lineageId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descripcion]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Estado\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Estado\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Estado\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de descripcion]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Estado\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de descripcion]"
+                      name="Copia de descripcion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descripcion]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Estado\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Estado\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Estado\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Estado\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Estado\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[Estados]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Estado\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.ProgramateDataMart]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.ProgramateDataMart]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Copia de descripcion]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Copia de descripcion"
+                      externalMetadataColumnId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estado]"
+                      lineageId="Package\Estado\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de descripcion]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="estado" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Estado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Estado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Estado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Estado\Origen de OLE DB"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen de OLE DB"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT descripcion FROM Estado</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Estado\Origen de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.programate]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.programate]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descripcion]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[descripcion]"
+                      length="50"
+                      lineageId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[descripcion]"
+                      name="descripcion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[descripcion]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="descripcion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[descripcion]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[descripcion]"
+                      name="descripcion" />
+                    <outputColumn
+                      refId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Estado\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Estado.Paths[Salida de conversión de datos]"
+              endId="Package\Estado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Salida de conversión de datos"
+              startId="Package\Estado\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Estado.Paths[Salida de origen de OLE DB]"
+              endId="Package\Estado\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Estado\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Limpieza"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Tarea Ejecutar SQL"
@@ -741,7 +1083,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{62438357-9546-41F7-996B-A1F0D11FAE53}"
-          SQLTask:SqlStatementSource="delete from Software;&#xA;delete from Clientes;&#xA;delete from Tiempo;&#xA;delete from Proyectos;&#xA;delete from Empleados;&#xA;DBCC CHECKIDENT ('Clientes', RESEED, 0);&#xA;DBCC CHECKIDENT ('Tiempo', RESEED, 0);&#xA;DBCC CHECKIDENT ('Proyectos', RESEED, 0);&#xA;DBCC CHECKIDENT ('Empleados', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="delete from Software;&#xA;delete from Clientes;&#xA;delete from Tiempo;&#xA;delete from Proyectos;&#xA;delete from Empleados;&#xA;delete from Estados;&#xA;DBCC CHECKIDENT ('Clientes', RESEED, 0);&#xA;DBCC CHECKIDENT ('Tiempo', RESEED, 0);&#xA;DBCC CHECKIDENT ('Proyectos', RESEED, 0);&#xA;DBCC CHECKIDENT ('Empleados', RESEED, 0);&#xA;DBCC CHECKIDENT ('Estados', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1144,6 +1486,11 @@
                       cachedName="HorasPlanificadas"
                       cachedPrecision="18"
                       lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[HorasPlanificadas]" />
+                    <inputColumn
+                      refId="Package\Software\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[EstadoID]"
+                      cachedDataType="i4"
+                      cachedName="EstadoID"
+                      lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoID]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -1273,6 +1620,27 @@
                           dataType="System.Int32"
                           description="Especifica la columna de entrada usada como origen de datos para la conversión."
                           name="SourceInputColumnLineageID">#{Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[HorasPlanificadas]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Software\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de EstadoID]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Software\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de EstadoID]"
+                      name="Copia de EstadoID"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoID]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
@@ -1418,6 +1786,13 @@
                       cachedName="Copia de HorasPlanificadas"
                       externalMetadataColumnId="Package\Software\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[horasPlanificadas]"
                       lineageId="Package\Software\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de HorasPlanificadas]" />
+                    <inputColumn
+                      refId="Package\Software\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Copia de EstadoID]"
+                      cachedDataType="numeric"
+                      cachedName="Copia de EstadoID"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Software\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estadoID]"
+                      lineageId="Package\Software\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copia de EstadoID]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1445,6 +1820,10 @@
                       refId="Package\Software\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[horasPlanificadas]"
                       dataType="r8"
                       name="horasPlanificadas" />
+                    <externalMetadataColumn
+                      refId="Package\Software\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[estadoID]"
+                      dataType="i4"
+                      name="estadoID" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1499,14 +1878,17 @@
                   description="Comando SQL para ejecutar."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT proyD.id AS ProyectoID, cliD.id AS ClienteID, tiD.id AS TiempoID, empD.id AS EmpleadoID,
+estD.id AS EstadoID,
 detN.horasIngresadas AS HorasConsumidas,
 proyN.horasPlanificadas AS HorasPlanificadas
 FROM programate.dbo.Software softN 
 INNER JOIN programate.dbo.Proyecto proyN ON (softN.proyectoID=proyN.id)
+INNER JOIN programate.dbo.Estado estN ON (proyN.estadoID=estN.id)
 INNER JOIN programate.dbo.Cliente cliN ON (cliN.id=proyN.clienteID)
 INNER JOIN programate.dbo.ProyectoDetalle detN ON (detN.proyectoID=proyN.id)
 INNER JOIN programate.dbo.Empleado empN ON (empN.id=detN.empleadoID)
 INNER JOIN ProgramateDataMart.dbo.Proyectos proyD ON (proyD.nombre=proyN.nombre)
+INNER JOIN ProgramateDataMart.dbo.Estados estD ON (estD.estado=estN.descripcion)
 INNER JOIN ProgramateDataMart.dbo.Clientes cliD ON (cliD.nombre=cliN.nombreCia)
 INNER JOIN ProgramateDataMart.dbo.Empleados empD ON (empN.apellidos=empD.apellido)
 INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fecha))</property>
@@ -1601,6 +1983,15 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       name="HorasPlanificadas"
                       precision="18"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EstadoID]"
+                      lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoID]"
+                      name="EstadoID"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1630,6 +2021,10 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       dataType="numeric"
                       name="HorasPlanificadas"
                       precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EstadoID]"
+                      dataType="i4"
+                      name="EstadoID" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1657,6 +2052,11 @@ INNER JOIN ProgramateDataMart.dbo.Tiempo tiD ON (tiD.fecha=CONVERT(DATE,softN.fe
                       dataType="i4"
                       lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EmpleadoID]"
                       name="EmpleadoID" />
+                    <outputColumn
+                      refId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EstadoID]"
+                      dataType="i4"
+                      lineageId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EstadoID]"
+                      name="EstadoID" />
                     <outputColumn
                       refId="Package\Software\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[HorasConsumidas]"
                       dataType="numeric"
@@ -2388,6 +2788,22 @@ FROM Software</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Restricción 7"
       DTS:To="Package\Software" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{F242F0B1-B025-4A6C-BC5A-28B033321C13}"
+      DTS:From="Package\Limpieza"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 8"
+      DTS:To="Package\Estado" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{C3F2364D-51C4-4E46-B146-BBFCB5D80B68}"
+      DTS:From="Package\Estado"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 9"
+      DTS:To="Package\Software" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
@@ -2400,7 +2816,7 @@ FROM Software</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="111,42"
           Id="Package\Cliente"
@@ -2408,49 +2824,49 @@ FROM Software</property>
         <NodeLayout
           Size="125,42"
           Id="Package\Empleado"
-          TopLeft="426,180" />
+          TopLeft="351,176" />
         <NodeLayout
           Size="120,42"
           Id="Package\Limpieza"
-          TopLeft="334,42" />
+          TopLeft="349,42" />
         <NodeLayout
           Size="120,42"
           Id="Package\Proyecto"
-          TopLeft="260,177" />
+          TopLeft="214,176" />
         <NodeLayout
           Size="121,42"
           Id="Package\Software"
-          TopLeft="330,338" />
+          TopLeft="352,338" />
         <NodeLayout
           Size="114,42"
           Id="Package\Tiempo"
-          TopLeft="625,179" />
+          TopLeft="637,181" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="366,84">
+          TopLeft="371.666666666667,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-228.5,92"
+              EndConnector="-234.166666666667,92"
               Start="0,0"
-              End="-228.5,84.5">
+              End="-234.166666666667,84.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28" />
+                    End="0,21.2258064516129" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,28"
-                    Point2="0,32"
-                    Point3="-4,32" />
+                    Point1="0,21.2258064516129"
+                    Point2="0,25.2258064516129"
+                    Point3="-4,25.2258064516129" />
                   <mssgle:LineSegment
-                    End="-224.5,32" />
+                    End="-230.166666666667,25.2258064516129" />
                   <mssgle:CubicBezierSegment
-                    Point1="-224.5,32"
-                    Point2="-228.5,32"
-                    Point3="-228.5,36" />
+                    Point1="-230.166666666667,25.2258064516129"
+                    Point2="-234.166666666667,25.2258064516129"
+                    Point3="-234.166666666667,29.2258064516129" />
                   <mssgle:LineSegment
-                    End="-228.5,84.5" />
+                    End="-234.166666666667,84.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2461,30 +2877,30 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="382.8,84">
+          TopLeft="390.333333333333,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-62.8,93"
+              EndConnector="-116.333333333333,92"
               Start="0,0"
-              End="-62.8,85.5">
+              End="-116.333333333333,84.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37.7132352941177" />
+                    End="0,33.5263157894737" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,37.7132352941177"
-                    Point2="0,41.7132352941177"
-                    Point3="-4,41.7132352941177" />
+                    Point1="0,33.5263157894737"
+                    Point2="0,37.5263157894737"
+                    Point3="-4,37.5263157894737" />
                   <mssgle:LineSegment
-                    End="-58.8,41.7132352941177" />
+                    End="-112.333333333333,37.5263157894737" />
                   <mssgle:CubicBezierSegment
-                    Point1="-58.8,41.7132352941177"
-                    Point2="-62.8,41.7132352941177"
-                    Point3="-62.8,45.7132352941177" />
+                    Point1="-112.333333333333,37.5263157894737"
+                    Point2="-116.333333333333,37.5263157894737"
+                    Point3="-116.333333333333,41.5263157894737" />
                   <mssgle:LineSegment
-                    End="-62.8,85.5" />
+                    End="-116.333333333333,84.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2495,30 +2911,30 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 2]"
-          TopLeft="427.6,84">
+          TopLeft="446.333333333333,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="254.4,95"
+              EndConnector="247.666666666667,97"
               Start="0,0"
-              End="254.4,87.5">
+              End="247.666666666667,89.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.0277777777778" />
+                    End="0,22.5967741935484" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,25.0277777777778"
-                    Point2="0,29.0277777777778"
-                    Point3="4,29.0277777777778" />
+                    Point1="0,22.5967741935484"
+                    Point2="0,26.5967741935484"
+                    Point3="4,26.5967741935484" />
                   <mssgle:LineSegment
-                    End="250.4,29.0277777777778" />
+                    End="243.666666666667,26.5967741935484" />
                   <mssgle:CubicBezierSegment
-                    Point1="250.4,29.0277777777778"
-                    Point2="254.4,29.0277777777778"
-                    Point3="254.4,33.0277777777778" />
+                    Point1="243.666666666667,26.5967741935484"
+                    Point2="247.666666666667,26.5967741935484"
+                    Point3="247.666666666667,30.5967741935484" />
                   <mssgle:LineSegment
-                    End="254.4,87.5" />
+                    End="247.666666666667,89.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2529,30 +2945,30 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 3]"
-          TopLeft="320,219">
+          TopLeft="274,218">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="59.2,119"
+              EndConnector="119.666666666667,120"
               Start="0,0"
-              End="59.2,111.5">
+              End="119.666666666667,112.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,61.6289881494986" />
+                    End="0,67.0603588907015" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,61.6289881494986"
-                    Point2="0,65.6289881494986"
-                    Point3="4,65.6289881494986" />
+                    Point1="0,67.0603588907015"
+                    Point2="0,71.0603588907015"
+                    Point3="4,71.0603588907015" />
                   <mssgle:LineSegment
-                    End="55.2,65.6289881494986" />
+                    End="115.666666666667,71.0603588907015" />
                   <mssgle:CubicBezierSegment
-                    Point1="55.2,65.6289881494986"
-                    Point2="59.2,65.6289881494986"
-                    Point3="59.2,69.6289881494986" />
+                    Point1="115.666666666667,71.0603588907015"
+                    Point2="119.666666666667,71.0603588907015"
+                    Point3="119.666666666667,75.0603588907015" />
                   <mssgle:LineSegment
-                    End="59.2,111.5" />
+                    End="119.666666666667,112.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2567,26 +2983,26 @@ FROM Software</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="219.1,120"
+              EndConnector="237.333333333333,120"
               Start="0,0"
-              End="219.1,112.5">
+              End="237.333333333333,112.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,79.3524684270953" />
+                    End="0,83.12" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,79.3524684270953"
-                    Point2="0,83.3524684270953"
-                    Point3="4,83.3524684270953" />
+                    Point1="0,83.12"
+                    Point2="0,87.12"
+                    Point3="4,87.12" />
                   <mssgle:LineSegment
-                    End="215.1,83.3524684270953" />
+                    End="233.333333333333,87.12" />
                   <mssgle:CubicBezierSegment
-                    Point1="215.1,83.3524684270953"
-                    Point2="219.1,83.3524684270953"
-                    Point3="219.1,87.3524684270953" />
+                    Point1="233.333333333333,87.12"
+                    Point2="237.333333333333,87.12"
+                    Point3="237.333333333333,91.12" />
                   <mssgle:LineSegment
-                    End="219.1,112.5" />
+                    End="237.333333333333,112.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2597,30 +3013,30 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 5]"
-          TopLeft="682,221">
+          TopLeft="694,223">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-257.6,117"
+              EndConnector="-243.833333333333,115"
               Start="0,0"
-              End="-257.6,109.5">
+              End="-243.833333333333,107.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,77.2686567164179" />
+                    End="0,79.49" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,77.2686567164179"
-                    Point2="0,81.2686567164179"
-                    Point3="-4,81.2686567164179" />
+                    Point1="0,79.49"
+                    Point2="0,83.49"
+                    Point3="-4,83.49" />
                   <mssgle:LineSegment
-                    End="-253.6,81.2686567164179" />
+                    End="-239.833333333333,83.49" />
                   <mssgle:CubicBezierSegment
-                    Point1="-253.6,81.2686567164179"
-                    Point2="-257.6,81.2686567164179"
-                    Point3="-257.6,85.2686567164179" />
+                    Point1="-239.833333333333,83.49"
+                    Point2="-243.833333333333,83.49"
+                    Point3="-243.833333333333,87.49" />
                   <mssgle:LineSegment
-                    End="-257.6,109.5" />
+                    End="-243.833333333333,107.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2631,30 +3047,18 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 6]"
-          TopLeft="405.2,84">
+          TopLeft="411.25,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="83.3,96"
+              EndConnector="0,92"
               Start="0,0"
-              End="83.3,88.5">
+              End="0,84.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.0588235294118" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,39.0588235294118"
-                    Point2="0,43.0588235294118"
-                    Point3="4,43.0588235294118" />
-                  <mssgle:LineSegment
-                    End="79.3,43.0588235294118" />
-                  <mssgle:CubicBezierSegment
-                    Point1="79.3,43.0588235294118"
-                    Point2="83.3,43.0588235294118"
-                    Point3="83.3,47.0588235294118" />
-                  <mssgle:LineSegment
-                    End="83.3,88.5" />
+                    End="0,84.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2665,30 +3069,90 @@ FROM Software</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción 7]"
-          TopLeft="488.5,222">
+          TopLeft="413,218">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-86.7,116"
+              EndConnector="0,120"
               Start="0,0"
-              End="-86.7,108.5">
+              End="0,112.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,59.9744758432088" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,59.9744758432088"
-                    Point2="0,63.9744758432088"
-                    Point3="-4,63.9744758432088" />
+                    End="0,112.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="111,42"
+          Id="Package\Estado"
+          TopLeft="498,179" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 8]"
+          TopLeft="427.666666666667,84">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125.833333333333,95"
+              Start="0,0"
+              End="125.833333333333,87.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-82.7,63.9744758432088" />
+                    End="0,34.75" />
                   <mssgle:CubicBezierSegment
-                    Point1="-82.7,63.9744758432088"
-                    Point2="-86.7,63.9744758432088"
-                    Point3="-86.7,67.9744758432088" />
+                    Point1="0,34.75"
+                    Point2="0,38.75"
+                    Point3="4,38.75" />
                   <mssgle:LineSegment
-                    End="-86.7,108.5" />
+                    End="121.833333333333,38.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.833333333333,38.75"
+                    Point2="125.833333333333,38.75"
+                    Point3="125.833333333333,42.75" />
+                  <mssgle:LineSegment
+                    End="125.833333333333,87.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 9]"
+          TopLeft="553.5,221">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-122.166666666667,117"
+              Start="0,0"
+              End="-122.166666666667,109.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.2838499184339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,65.2838499184339"
+                    Point2="0,69.2838499184339"
+                    Point3="-4,69.2838499184339" />
+                  <mssgle:LineSegment
+                    End="-118.166666666667,69.2838499184339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-118.166666666667,69.2838499184339"
+                    Point2="-122.166666666667,69.2838499184339"
+                    Point3="-122.166666666667,73.2838499184339" />
+                  <mssgle:LineSegment
+                    End="-122.166666666667,109.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2789,7 +3253,7 @@ FROM Software</property>
     design-time-name="Package\Empleado">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="168,42"
           Id="Package\Empleado\Destino de OLE DB"
@@ -2821,9 +3285,7 @@ FROM Software</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2845,9 +3307,7 @@ FROM Software</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2977,28 +3437,6 @@ FROM Software</property>
           Id="Package\Software\Conversión de datos"
           TopLeft="350,181" />
         <EdgeLayout
-          Id="Package\Software.Paths[Salida de conversión de datos]"
-          TopLeft="435.25,223">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,68"
-              Start="0,0"
-              End="0,60.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,60.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\Software.Paths[Salida de origen de OLE DB]"
           TopLeft="438.25,117">
           <EdgeLayout.Curve>
@@ -3012,6 +3450,28 @@ FROM Software</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Software.Paths[Salida de conversión de datos]"
+          TopLeft="435.25,223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3048,7 +3508,7 @@ FROM Software</property>
     design-time-name="Package\Tiempo">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="164,42"
           Id="Package\Tiempo\Origen de OLE DB"
@@ -3080,9 +3540,7 @@ FROM Software</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3104,9 +3562,7 @@ FROM Software</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3122,6 +3578,91 @@ FROM Software</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Tiempo\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Estado">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Estado\Origen de OLE DB"
+          TopLeft="387,95" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Estado\Conversión de datos"
+          TopLeft="388,185" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Estado\Destino de OLE DB"
+          TopLeft="385,278" />
+        <EdgeLayout
+          Id="Package\Estado.Paths[Salida de origen de OLE DB]"
+          TopLeft="472.25,137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Estado.Paths[Salida de conversión de datos]"
+          TopLeft="472.25,227">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Estado\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Estado\Destino de OLE DB">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
